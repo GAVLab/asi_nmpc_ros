@@ -1,0 +1,9 @@
+     <!-- launch xbow440 -->
+
+<launch>
+
+    <node pkg="xbow440" type="xbow440_node" name="xbow440_node" required="true" output="screen" >
+
+    </node>
+
+</launch>

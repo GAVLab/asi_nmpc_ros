@@ -1,0 +1,138 @@
+<!-- Launch the nmpc -->
+
+<launch>
+
+
+<!-- Ublox stuff -->
+
+    <arg name="device" default="/dev/ttyACM0"/>
+    <arg name="gps" default="gps"/>
+    <arg name="frame_id" default="$(arg gps)"/>
+    <arg name="baudrate" default="9600"/>
+    <arg name="output" default="screen"/>
+
+    <!-- Read at 4Hz -->
+
+    <arg name="rate" default="1"/>
+
+    <!-- SBAS enabled -->
+
+    <arg name="enable_sbas" default="true"/>
+
+    <!-- See Ublox docs -->
+
+    <arg name="dynamic_model" default="portable"/>
+
+    <!-- 2D and 3D fixes enabled -->
+
+    <arg name="fix_mode" default="both"/>
+
+    <!-- No dead reckoning after signal loss -->
+
+    <arg name="dr_limit" default="0"/>
+
+    <!-- Manage use of GLONASS and BeiDou -->
+
+    <arg name="enable_beidou" default="false"/>
+    <arg name="enable_glonass" default="false"/>
+
+    <!-- Manage use of PPP -->
+
+    <arg name="enable_ppp" default="false"/>
+
+    <!-- Specify ublox version (6,7,8) -->
+
+    <arg name="ublox_version" default="8"/>
+
+
+
+
+
+
+
+
+
+
+
+
+	<node pkg="nmpc" type="nmpc_node" name="asi_nmpc" required="true" output="screen" >
+
+
+        <param name="tLook"          value="6.0"      type="double"/> <!-- play with this number. this is the control horizon  -->
+        <param name="Vmax"          value="0.6"     type="double"/><!--  maximum allowable velocity  -->
+        <param name="Vmin"          value="0.6"      type="double"/> <!-- minimum allowable velocity --> 
+        <param name="obFieldViewx"          value="50"      type="double"/> <!-- field of view in x direction in which obstacles are considered --> 
+        <param name="obFieldViewy"          value="50"      type="double"/> <!-- field of view in y direction in which obstacles are considered  -->
+
+        <!-- Read in target location -->
+        <param name="targetLat"          value="32.6053071"      type="double"/>
+        <param name="targetLong"          value="-85.4874937"      type="double"/>
+        <param name="targetAlt"          value="172.373"      type="double"/>
+
+        <!-- Read in a predefined obstacle. This is just for testing, and will be replaced with locations determined by lidar -->
+        <param name="obstacleLat"          value="32.5952821139"      type="double"/>
+        <param name="obstacleLong"          value="-85.2953472459"      type="double"/>
+        <param name="obstacleAlt"          value="203.483087648"     type="double"/>
+
+
+
+    </node>
+
+
+<!-- Launch the command publisher -->
+
+
+    <node pkg="teensy_commands" type="command_publisher" name="teensy_pub" required="true" output="screen" >
+
+    </node>
+
+
+
+<!-- launch the joypad stuff -->
+
+ <node pkg="joy" type="joy_node" name="joy_node" required="true" output="screen" > 
+
+</node>
+
+
+
+
+
+
+
+
+ <!-- launch ublox -->
+
+
+
+       <node name="$(arg gps)" pkg="ublox_gps" type="ublox_gps" output="$(arg output)">
+        <param name="device" type="string" value="$(arg device)"/>
+        <param name="frame_id" type="string" value="$(arg frame_id)"/>
+        <param name="baudrate" type="int" value="$(arg baudrate)"/>
+        <param name="rate" type="int" value="$(arg rate)"/>
+        <param name="enable_sbas" type="bool" value="$(arg enable_sbas)"/>
+        <param name="dynamic_model" type="string" value="$(arg dynamic_model)"/>
+        <param name="fix_mode" type="string" value="$(arg fix_mode)"/>
+        <param name="dr_limit" type="int" value="$(arg dr_limit)"/>
+        <param name="enable_beidou" type="bool" value="$(arg enable_beidou)"/>
+        <param name="enable_glonass" type="bool" value="$(arg enable_glonass)"/>
+        <param name="enable_ppp" type="bool" value="$(arg enable_ppp)"/>
+        <param name="ublox_version" type="int" value="$(arg ublox_version)"/>
+    </node>
+
+
+
+
+
+
+
+
+     <!-- launch xbow440 -->
+
+    <node pkg="xbow440" type="xbow440_node" name="xbow440_node" required="true" output="screen" >
+
+    </node>
+
+
+
+</launch>

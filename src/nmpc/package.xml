@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<package>
+  <name>nmpc</name>
+  <version>0.0.0</version>
+  <description>ROS wrapper for ASI NMPC controller</description>
+  <maintainer email="aje0005@auburn.edu">vas0006</maintainer>
+  <license>Gavlab</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>sensor_msgs</build_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_depend>ackermann_msgs</build_depend>
+  <build_depend>geometry_msgs</build_depend>
+  <build_depend>message_generation</build_depend>
+  <build_depend>nav_msgs</build_depend>
+  <build_depend>tf</build_depend>
+  <build_depend>teensy_commands</build_depend>
+  <build_depend>serial</build_depend>
+  <build_depend>ublox_msgs</build_depend>
+
+  <run_depend>roscpp</run_depend>
+  <run_depend>sensor_msgs</run_depend>
+  <run_depend>std_msgs</run_depend>
+  <run_depend>ackermann_msgs</run_depend>
+  <run_depend>geometry_msgs</run_depend>
+  <run_depend>message_generation</run_depend>
+  <run_depend>nav_msgs</run_depend>
+  <run_depend>tf</run_depend>
+  <run_depend>teensy_commands</run_depend>
+  <run_depend>serial</run_depend>
+  <run_depend>ublox_msgs</run_depend>
+
+  <!-- The export tag contains other, unspecified, tags -->
+  <export>
+    <!-- Other tools can request additional information be placed here -->
+
+  </export>
+</package>
