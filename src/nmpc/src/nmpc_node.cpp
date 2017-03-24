@@ -188,7 +188,7 @@ void nmpc_node::gpsLLACallback(const ublox_msgs::NavPOSLLH::ConstPtr& gps_msg)
 
 void nmpc_node::imuCallback(const sensor_msgs::Imu::ConstPtr& imu_msg)
 {
-	imu_data.yawRate = imu_msg->angular_velocity.z;
+	imu_data.yawRate = -imu_msg->angular_velocity.z;
 	flags.newYawRate = true;
 	// Maybe add a counter here for better initialization. Might not want to just take the first measurement we get
 }
